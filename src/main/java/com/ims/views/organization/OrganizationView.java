@@ -1,4 +1,4 @@
-package com.ims.views.products;
+package com.ims.views.organization;
 
 import com.ims.data.entity.SamplePerson;
 import com.ims.data.service.SamplePersonService;
@@ -38,18 +38,18 @@ import java.util.List;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.jpa.domain.Specification;
 
-@PageTitle("Products")
-@Route(value = "master-detail", layout = MainLayout.class)
-@RolesAllowed("ADMIN")
+@PageTitle("Organization")
+@Route(value = "organization-detail", layout = MainLayout.class)
+@RolesAllowed("ADMINISTRATOR")
 @Uses(Icon.class)
-public class ProductsView extends Div {
+public class OrganizationView extends Div {
 
     private Grid<SamplePerson> grid;
 
     private Filters filters;
     private final SamplePersonService samplePersonService;
 
-    public ProductsView(SamplePersonService SamplePersonService) {
+    public OrganizationView(SamplePersonService SamplePersonService) {
         this.samplePersonService = SamplePersonService;
         setSizeFull();
         addClassNames("products-view");
@@ -129,7 +129,7 @@ public class ProductsView extends Div {
             addProduct.setIcon(new Icon(VaadinIcon.PLUS));
             
             addProduct.addClickListener(e->{
-            	UI.getCurrent().navigate(AddProductView.class);
+            	UI.getCurrent().navigate(AddOrganizationView.class);
             });
             
             Div actions = new Div(resetBtn, searchBtn,addProduct);

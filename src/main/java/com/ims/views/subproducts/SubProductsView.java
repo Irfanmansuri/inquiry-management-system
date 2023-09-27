@@ -4,7 +4,6 @@ import com.ims.data.entity.SamplePerson;
 import com.ims.data.service.SamplePersonService;
 import com.ims.views.MainLayout;
 import com.ims.views.products.AddProductView;
-import com.ims.views.products.AddSubProductView;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.Text;
 import com.vaadin.flow.component.UI;

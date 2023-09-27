@@ -1,17 +1,15 @@
 package com.ims.views;
 
-import java.io.ByteArrayInputStream;
-import java.util.Optional;
-
 import org.vaadin.lineawesome.LineAwesomeIcon;
 
-import com.ims.data.entity.User;
 import com.ims.security.AuthenticatedUser;
 import com.ims.views.about.AboutView;
 import com.ims.views.dashboard.DashboardView;
+import com.ims.views.inquiry.InquiryView;
 import com.ims.views.login.LoginView;
 import com.ims.views.login.SingupView;
 import com.ims.views.message.MessageView;
+import com.ims.views.organization.OrganizationView;
 import com.ims.views.products.ProductsView;
 import com.ims.views.subproducts.SubProductsView;
 import com.vaadin.flow.component.UI;
@@ -19,17 +17,14 @@ import com.vaadin.flow.component.Unit;
 import com.vaadin.flow.component.applayout.AppLayout;
 import com.vaadin.flow.component.applayout.DrawerToggle;
 import com.vaadin.flow.component.avatar.Avatar;
-import com.vaadin.flow.component.charts.model.style.Style;
 import com.vaadin.flow.component.contextmenu.MenuItem;
 import com.vaadin.flow.component.contextmenu.SubMenu;
-import com.vaadin.flow.component.html.Anchor;
-import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.Footer;
 import com.vaadin.flow.component.html.H1;
 import com.vaadin.flow.component.html.H2;
 import com.vaadin.flow.component.html.Header;
 import com.vaadin.flow.component.html.Image;
-import com.vaadin.flow.component.icon.Icon;
+import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.menubar.MenuBar;
 import com.vaadin.flow.component.menubar.MenuBarVariant;
 import com.vaadin.flow.component.orderedlayout.FlexComponent;
@@ -97,8 +92,16 @@ public class MainLayout extends AppLayout {
 
 		}
 		if (accessChecker.hasAccess(MessageView.class)) {
-			nav.addItem(new SideNavItem("Message", MessageView.class, LineAwesomeIcon.PENCIL_RULER_SOLID.create()));
+			nav.addItem(new SideNavItem("Message/Marketing", MessageView.class, LineAwesomeIcon.ENVELOPE.create()));
 
+		}
+		if (accessChecker.hasAccess(MessageView.class)) {
+			nav.addItem(new SideNavItem("Inquiry", InquiryView.class, LineAwesomeIcon.MOBILE_ALT_SOLID.create()));
+
+		}
+		if (accessChecker.hasAccess(OrganizationView.class)) {
+			nav.addItem(new SideNavItem("Organization", OrganizationView.class, VaadinIcon.OFFICE.create()));
+			
 		}
 		if (accessChecker.hasAccess(LoginView.class)) {
 			nav.addItem(new SideNavItem("Login", LoginView.class, LineAwesomeIcon.USER.create()));

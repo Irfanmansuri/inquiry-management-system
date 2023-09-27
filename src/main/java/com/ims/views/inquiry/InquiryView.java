@@ -1,4 +1,4 @@
-package com.ims.views.products;
+package com.ims.views.inquiry;
 
 import com.ims.data.entity.SamplePerson;
 import com.ims.data.service.SamplePersonService;
@@ -38,18 +38,18 @@ import java.util.List;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.jpa.domain.Specification;
 
-@PageTitle("Products")
-@Route(value = "master-detail", layout = MainLayout.class)
+@PageTitle("Inquiries")
+@Route(value = "inquiries", layout = MainLayout.class)
 @RolesAllowed("ADMIN")
 @Uses(Icon.class)
-public class ProductsView extends Div {
+public class InquiryView extends Div {
 
     private Grid<SamplePerson> grid;
 
     private Filters filters;
     private final SamplePersonService samplePersonService;
 
-    public ProductsView(SamplePersonService SamplePersonService) {
+    public InquiryView(SamplePersonService SamplePersonService) {
         this.samplePersonService = SamplePersonService;
         setSizeFull();
         addClassNames("products-view");
@@ -124,15 +124,15 @@ public class ProductsView extends Div {
             searchBtn.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
             searchBtn.addClickListener(e -> onSearch.run());
             
-            Button addProduct = new Button("Add Product");
-            addProduct.addThemeVariants(ButtonVariant.LUMO_SUCCESS);
-            addProduct.setIcon(new Icon(VaadinIcon.PLUS));
+            Button addNewInquiry = new Button("Add New Inquiry");
+            addNewInquiry.addThemeVariants(ButtonVariant.LUMO_SUCCESS);
+            addNewInquiry.setIcon(new Icon(VaadinIcon.PLUS));
             
-            addProduct.addClickListener(e->{
-            	UI.getCurrent().navigate(AddProductView.class);
+            addNewInquiry.addClickListener(e->{
+            	UI.getCurrent().navigate(AddInquiryView.class);
             });
             
-            Div actions = new Div(resetBtn, searchBtn,addProduct);
+            Div actions = new Div(resetBtn, searchBtn,addNewInquiry);
             actions.addClassName(LumoUtility.Gap.SMALL);
             actions.addClassName("actions");
             
