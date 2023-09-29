@@ -1,8 +1,11 @@
 package com.ims.views.message;
 
+import java.io.InputStream;
+
 import com.ims.views.MainLayout;
 import com.ims.views.dashboard.DashboardView;
 import com.vaadin.flow.component.Composite;
+import com.vaadin.flow.component.Text;
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
@@ -14,11 +17,16 @@ import com.vaadin.flow.component.html.H3;
 import com.vaadin.flow.component.html.Hr;
 import com.vaadin.flow.component.html.Paragraph;
 import com.vaadin.flow.component.icon.Icon;
+import com.vaadin.flow.component.notification.Notification;
+import com.vaadin.flow.component.notification.NotificationVariant;
 import com.vaadin.flow.component.orderedlayout.FlexComponent.Alignment;
 import com.vaadin.flow.component.orderedlayout.FlexComponent.JustifyContentMode;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.textfield.TextArea;
+import com.vaadin.flow.component.upload.Upload;
+import com.vaadin.flow.component.upload.receivers.FileBuffer;
+import com.vaadin.flow.dom.Style.Overflow;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.theme.lumo.LumoUtility.Gap;
@@ -54,6 +62,36 @@ public class MessageView extends Composite<VerticalLayout> {
 		TextArea messageFields = new TextArea();
 		messageFields.setWidthFull();
 		messageFields.setLabel("Message");
+
+		Paragraph hint = new Paragraph("Maximum file size: 1 MB");
+		hint.getStyle().set("color", "var(--lumo-secondary-text-color)");
+
+		int maxFileSizeInBytes = 1 * 1024 * 1024; // 1MB
+
+		FileBuffer buffer = new FileBuffer();
+		Upload upload = new Upload(buffer);
+		upload.setWidthFull();
+		upload.setMaxFileSize(maxFileSizeInBytes);
+		upload.setHeightFull();
+		upload.setDropAllowed(true);
+		upload.getStyle().setOverflow(Overflow.INHERIT);
+		upload.setAcceptedFileTypes("text/csv", "application/vnd.ms-excel",
+				"application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+
+		upload.addSucceededListener(event -> {
+			String fileName = event.getFileName();
+			InputStream inputStream = buffer.getInputStream();
+			Notification nt = Notification.show(fileName);
+			nt.addThemeVariants(NotificationVariant.LUMO_WARNING);
+			// Do something with the file data
+			// processFile(inputStream, fileName);
+		});
+
+		upload.addFileRejectedListener(event -> {
+			String errorMessage = event.getErrorMessage();
+			Notification notification = Notification.show(errorMessage, 5000, Notification.Position.MIDDLE);
+			notification.addThemeVariants(NotificationVariant.LUMO_ERROR);
+		});
 
 		HorizontalLayout buttons = new HorizontalLayout();
 		buttons.addClassName(Gap.MEDIUM);
@@ -104,9 +142,8 @@ public class MessageView extends Composite<VerticalLayout> {
 		fieldVerticalLayout.add(checkboxGroup);
 		fieldVerticalLayout.add(checkbox);
 		fieldVerticalLayout.add(mobileNumbersField);
-
+		fieldVerticalLayout.add(new Text("OR Select csv or xlsx file"), upload, hint);
 		fieldVerticalLayout.add(messageFields);
-
 		fieldVerticalLayout.add(buttons);
 		fieldVerticalLayout.add(hr);
 

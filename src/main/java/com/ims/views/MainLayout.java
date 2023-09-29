@@ -95,7 +95,7 @@ public class MainLayout extends AppLayout {
 			nav.addItem(new SideNavItem("Message/Marketing", MessageView.class, LineAwesomeIcon.ENVELOPE.create()));
 
 		}
-		if (accessChecker.hasAccess(InquiryView.class)) {
+		if (accessChecker.hasAccess(MessageView.class)) {
 			nav.addItem(new SideNavItem("Inquiry", InquiryView.class, LineAwesomeIcon.MOBILE_ALT_SOLID.create()));
 
 		}

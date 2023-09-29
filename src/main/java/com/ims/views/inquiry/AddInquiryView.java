@@ -3,6 +3,7 @@ package com.ims.views.inquiry;
 import java.io.InputStream;
 
 import com.ims.views.MainLayout;
+import com.ims.views.dashboard.DashboardView;
 import com.ims.views.subproducts.SubProductsView;
 import com.vaadin.flow.component.HtmlComponent;
 import com.vaadin.flow.component.UI;
@@ -53,7 +54,6 @@ public class AddInquiryView extends VerticalLayout {
 		productsComboBox.setRequired(true);
 		productsComboBox.setWidthFull();
 		productsComboBox.setErrorMessage("Product is required field");
-//		comboBox.setItemLabelGenerator(Country::getName);
 
 		ComboBox<String> subProductsComboBox = new ComboBox<>("Select Sub Product");
 		subProductsComboBox.setItems("product1", "product2", "product3", "product4", "product5");
@@ -142,7 +142,7 @@ public class AddInquiryView extends VerticalLayout {
 
 		Button cancelButton = new Button("Cancel");
 		cancelButton.addClickListener(e -> {
-			UI.getCurrent().navigate(SubProductsView.class);
+			UI.getCurrent().navigate(InquiryView.class);
 		});
 
 		buttons.add(submitButton, cancelButton);

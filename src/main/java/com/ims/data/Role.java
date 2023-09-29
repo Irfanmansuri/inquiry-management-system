@@ -1,5 +1,5 @@
 package com.ims.data;
 
 public enum Role {
-    USER, ADMIN;
+	ADMINISTRATOR, ADMIN, USER;
 }

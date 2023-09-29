@@ -20,7 +20,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
  */
 @SpringBootApplication
 @Theme(value = "inquirymanagementsystem")
-@EnableJpaRepositories
+//@EnableJpaRepositories
 public class Application implements AppShellConfigurator {
 
     public static void main(String[] args) {

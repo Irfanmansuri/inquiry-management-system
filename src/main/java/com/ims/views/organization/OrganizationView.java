@@ -124,7 +124,7 @@ public class OrganizationView extends Div {
             searchBtn.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
             searchBtn.addClickListener(e -> onSearch.run());
             
-            Button addProduct = new Button("Add Product");
+            Button addProduct = new Button("Add Organization");
             addProduct.addThemeVariants(ButtonVariant.LUMO_SUCCESS);
             addProduct.setIcon(new Icon(VaadinIcon.PLUS));
             

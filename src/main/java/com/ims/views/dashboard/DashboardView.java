@@ -2,6 +2,7 @@ package com.ims.views.dashboard;
 
 import com.ims.views.MainLayout;
 import com.ims.views.dashboard.ServiceHealth.Status;
+import com.ims.views.inquiry.AddInquiryView;
 import com.ims.views.products.AddProductView;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.UI;
@@ -67,7 +68,7 @@ public class DashboardView extends VerticalLayout {
 		addNewInquiryButton.setIcon(new Icon(VaadinIcon.PLUS));
 
 		addNewInquiryButton.addClickListener(e -> {
-			UI.getCurrent().navigate(AddProductView.class);
+			UI.getCurrent().navigate(AddInquiryView.class);
 		});
 
 		Div actions = new Div(addNewInquiryButton);
